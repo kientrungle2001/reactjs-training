@@ -9,9 +9,11 @@ export default class AxiosHelper {
 	static handleSuccess(resp) {
 		console.log('response on helper');
 		console.log(resp);
+		return resp;
 	}
 	static handleError(error) {
 		console.log('error on helper');
 		console.log(error);
+		return error;
 	}
 }

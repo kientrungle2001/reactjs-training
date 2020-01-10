@@ -6,10 +6,10 @@ export default class LayoutTwoColumn extends Component {
 		return (
 			<Container>
 				<Row>
-					<Col md={6}>
+					<Col {...this.props.leftColSize}>
 						{this.props.left}
 					</Col>
-					<Col md={6}>
+					<Col {...this.props.rightColSize}>
 						{this.props.right}
 					</Col>
 				</Row>

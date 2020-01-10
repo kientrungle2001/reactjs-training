@@ -43,10 +43,6 @@ class CustomerAccountLogin extends Component {
 				.then((resp) => {
 					console.log('response on submit');
 					console.log(resp);
-				})
-				.catch((err) => {
-					console.log('error on submit');
-					console.log(err);
 				});
 		});
 	}

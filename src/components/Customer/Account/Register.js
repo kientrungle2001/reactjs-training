@@ -22,23 +22,16 @@ export default class CustomerAccountRegister extends Component {
 			<Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
 				<fieldset>
 					<legend>Customer Register</legend>
-					<Form.Group>
-						<label>Email:</label>
-						<Form.Control name="email" type="email" placeholder="Enter your email" required defaultValue="email@example.com" />
-						<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-					</Form.Group>
-					<Form.Group>
-						<label>Password:</label>
-						<Form.Control name="password" type="password" placeholder="Enter your password" required />
-						<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-						<Form.Control.Feedback type="invalid">Please Enter Your Password!</Form.Control.Feedback>
-					</Form.Group>
-					<Form.Group>
-						<label>Confirm Password:</label>
-						<Form.Control name="confirmPassword" type="password" placeholder="Enter your confirm password" required />
-						<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-						<Form.Control.Feedback type="invalid">Please Enter Your Confirm Password!</Form.Control.Feedback>
-					</Form.Group>
+					{this.props.fields && this.props.fields.map((fieldSetting) => {
+						return (
+							<Form.Group key={fieldSetting.index}>
+								<label>{fieldSetting.label}:</label>
+
+								{this.createFormControl(fieldSetting)}
+
+							</Form.Group>
+						);
+					})}
 					<Form.Group>
 						<Form.Check
 							required
@@ -53,5 +46,25 @@ export default class CustomerAccountRegister extends Component {
 				</fieldset>
 			</Form>
 		)
+	}
+
+	createFormControl(fieldSetting) {
+		return (
+			<>
+				{fieldSetting.type === 'select' ? (
+					<Form.Control name={fieldSetting.index} as={fieldSetting.type} placeholder={"Enter your " + fieldSetting.label} required>
+						<option value={''}>{fieldSetting.label}</option>
+						{fieldSetting.options.map((option) => {
+						return <option key={option.value} value={option.value}>{option.label}</option>;
+						})}
+					</Form.Control>
+				) : (
+						<Form.Control name={fieldSetting.index} type={fieldSetting.type} placeholder={"Enter your " + fieldSetting.label} required />
+					)}
+
+				<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+				<Form.Control.Feedback type="invalid">Please Enter Your {fieldSetting.label}!</Form.Control.Feedback>
+			</>
+		);
 	}
 }
