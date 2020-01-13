@@ -4,6 +4,7 @@ export default {
 			label: 'Email',
 			index: 'email',
 			type: 'email',
+			required: true,
 			validation: {
 				required: true,
 				email: 'Please enter a valid email address'
